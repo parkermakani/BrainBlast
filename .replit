@@ -11,3 +11,8 @@ SYLLABUS_CSV_URL = "https://docs.google.com/spreadsheets/d/1NzgR9tcM8G5lmW_r5eFd
 [[ports]]
 localPort = 3000
 externalPort = 80
+
+[deployment]
+# Build front-end then launch FastAPI in a container deployment
+deploymentTarget = "image"
+run = ["sh", "-c", "pip install -r backend/requirements.txt && cd frontend && npm ci --legacy-peer-deps && npm run build && cd .. && uvicorn backend.main:app --host 0.0.0.0 --port $PORT"]
