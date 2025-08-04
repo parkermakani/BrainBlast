@@ -79,10 +79,7 @@ async def get_week_detail(week_num: int):
             return row
     return {"detail": "Week not found"}, 404
 
-# Register API routes
-app.include_router(api)
-
-# Serve the pre-built React app (static) last so it catches all other routes
-frontend_dist = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend", "dist"))
-if os.path.isdir(frontend_dist):
-    app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="frontend") 
+# Mount static files from the frontend dist directory
+frontend_dist_path = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+if os.path.exists(frontend_dist_path):
+    app.mount("/", StaticFiles(directory=frontend_dist_path, html=True), name="static") 
