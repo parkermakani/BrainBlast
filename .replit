@@ -1,0 +1,14 @@
+# Tell Replit which language module bundle to pull in
+modules = ["python-3.12", "nodejs-20"]
+
+# One-liner that:
+#   1. installs backend Python deps
+#   2. installs + builds the React front-end once
+#   3. starts FastAPI (serves backend API **and** the built front-end)
+run = "bash -c 'pip install -r backend/requirements.txt && cd frontend && npm install --legacy-peer-deps && npm run build && cd && uvicorn backend.main:app --host 0.0.0.0 --port 3000'"
+
+[nix]
+channel = "stable-25_05"
+
+[deployment]
+run = ["sh", "-c", "SYLLABUS_CSV_URL=https://docs.google.com/spreadsheets/d/1NzgR9tcM8G5lmW_r5eFd-Qt7FofDQxBzH1hilnVWo_g/export?format=csv"]
