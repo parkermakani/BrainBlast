@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import os, csv, requests
 from typing import List, Dict
 import logging
@@ -73,4 +74,9 @@ async def get_week_detail(week_num: int):
     for row in load_syllabus():
         if row["week"] == week_num:
             return row
-    return {"detail": "Week not found"}, 404 
+    return {"detail": "Week not found"}, 404
+
+# Mount static files from the frontend dist directory
+frontend_dist_path = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+if os.path.exists(frontend_dist_path):
+    app.mount("/", StaticFiles(directory=frontend_dist_path, html=True), name="static") 
