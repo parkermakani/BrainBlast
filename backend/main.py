@@ -81,5 +81,8 @@ async def get_week_detail(week_num: int):
 
 # Mount static files from the frontend dist directory
 frontend_dist_path = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+# Register API routes *before* mounting static files so /api paths resolve
+app.include_router(api)
+
 if os.path.exists(frontend_dist_path):
     app.mount("/", StaticFiles(directory=frontend_dist_path, html=True), name="static") 
