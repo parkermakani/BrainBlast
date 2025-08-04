@@ -17,7 +17,7 @@ export default function WeekDetail() {
 
   useEffect(() => {
     if (!weekNum) return;
-    fetch(`/week/${weekNum}`)
+    fetch(`/api/week/${weekNum}`)
       .then((r) => r.json())
       .then((data) => setWeek(data));
   }, [weekNum]);

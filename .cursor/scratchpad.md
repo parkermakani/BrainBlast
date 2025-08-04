@@ -89,7 +89,7 @@ Adjusted styles per user request:
 - Added `.menu` flex styles to allow top nav items to spread full width.
 - Week cards already full container width.
 - Headings now use Papyrus font via new variable in `theme.css`.
-- Global text color switched to red. Card backgrounds set to yellow. Nav and footer backgrounds set to yellow. "View details" links now neon green. Added Labubu logo to top nav.
+- Global text color switched to red. Card backgrounds set to yellow. Nav and footer backgrounds set to yellow. "View details" links now neon green. Added Labubu logo to top nav. Added empty `backend/__init__.py` so Uvicorn can import `backend.main` on Replit. Mounted `frontend/dist` static files in FastAPI so root URL serves React app. Prefixed API routes with `/api` to avoid collision with front-end routes; updated frontend fetch calls.
   Please review layout.
 
 ## CSV Format Guidelines

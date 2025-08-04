@@ -12,7 +12,7 @@ export default function SyllabusOverview() {
   const [weeks, setWeeks] = useState<Week[]>([]);
 
   useEffect(() => {
-    fetch("/syllabus")
+    fetch("/api/syllabus")
       .then((r) => r.json())
       .then((data) => setWeeks(data));
   }, []);

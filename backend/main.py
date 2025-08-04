@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import os, csv, requests
 from typing import List, Dict
 import logging
@@ -10,6 +11,9 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
 
 app = FastAPI(title="Syllabus API")
+
+# ----- API ROUTER -----
+api = APIRouter(prefix="/api")
 
 # Allow all origins for simplicity during development
 app.add_middleware(
@@ -60,17 +64,25 @@ def load_syllabus() -> List[Dict]:
         })
     return parsed
 
-@app.get("/health")
+@api.get("/health")
 async def health():
     return {"status": "ok"}
 
-@app.get("/syllabus")
+@api.get("/syllabus")
 async def get_syllabus():
     return load_syllabus()
 
-@app.get("/week/{week_num}")
+@api.get("/week/{week_num}")
 async def get_week_detail(week_num: int):
     for row in load_syllabus():
         if row["week"] == week_num:
             return row
-    return {"detail": "Week not found"}, 404 
+    return {"detail": "Week not found"}, 404
+
+# Register API routes
+app.include_router(api)
+
+# Serve the pre-built React app (static) last so it catches all other routes
+frontend_dist = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend", "dist"))
+if os.path.isdir(frontend_dist):
+    app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="frontend") 
