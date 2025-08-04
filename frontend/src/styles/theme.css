@@ -1,0 +1,48 @@
+:root {
+  --color-bg: #ffffff;
+  --color-bg-alt: #f9fafb;
+  --color-text: #ff0000;
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-contrast: #ffffff;
+  --color-border: #e5e7eb;
+
+  --font-base: "Comic Sans MS", "Comic Sans", cursive;
+  --font-heading: "Papyrus", "Comic Sans MS", cursive;
+  /* Rainbow gradient variable for fun background */
+  --color-rainbow: linear-gradient(
+    120deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
+body {
+  /* Use rainbow gradient background */
+  background: var(--color-rainbow);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  margin: 0;
+  text-align: center;
+}
+
+/* Apply Papyrus font to all heading levels */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
