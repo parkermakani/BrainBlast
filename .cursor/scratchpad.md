@@ -122,3 +122,5 @@ _(empty – will capture reusable insights or fixes during development)_
 Adjusted CSS: removed 100vw references (#root now max-width 100%), ensured cards/containers use 100% width; this prevents layout shift for scrollbars.
 
 Added `box-sizing:border-box` to `.container` and `overflow-x:hidden` on body to eliminate slight right overflow.
+
+- Updated `.replit` to add proper [deployment] section with build and run commands using $PORT, targeting image deployment.
